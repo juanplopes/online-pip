@@ -15,11 +15,11 @@
     }
     
     var eDist = function(p1, p2, p3) {
-        return dist(p1[0], p3[0], p1[1], p3[1]) + dist(p2[0], p3[0], p2[1], p3[1]);
+        return (dist(p1[0], p3[0], p1[1], p3[1]) + dist(p2[0], p3[0], p2[1], p3[1])) * (p2[0] - p1[0]);
     }
     
     var vDist = function(p1, p2, p3) {
-        return Math.abs((p1[1] + (p2[1]-p1[1])*(p3[0]-p1[0])/(p2[0]-p1[0]) - p3[1]))
+        return Math.abs((p1[1] + (p2[1]-p1[1])*(p3[0]-p1[0])/(p2[0]-p1[0]) - p3[1])) * (p2[0] - p1[0]);
     }
 
     var pip = function(data, k, dist) {
@@ -96,8 +96,8 @@
         var closing = prepare(closingData);
         var volume = prepare(volumeData);
         plot('full', closing, volume);
-        plot('pip_euclidean', pip(closing, 400, eDist), pip(volume, 400, eDist));
         plot('pip_vertical', pip(closing, 400, vDist), pip(volume, 400, vDist));
+        plot('pip_euclidean', pip(closing, 400, eDist), pip(volume, 400, eDist));
     });
 </script>
 
@@ -105,9 +105,9 @@
 
 <div id="full">
 </div>
-<div id="pip_euclidean">
-</div>
 <div id="pip_vertical">
+</div>
+<div id="pip_euclidean">
 </div>
 
 
